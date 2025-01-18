@@ -3,100 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
+    <title>Cadastro - Estudo Colaborativo</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
+            background: url('https://via.placeholder.com/1500x1000/8e44ad/ffffff?text=Estudo+Colaborativo') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             margin: 0;
+            color: #fff;
         }
-        .form-container {
-            background-color: #fff;
-            padding: 30px;
+
+        .cadastro-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
-        }
-        h1 {
             text-align: center;
-            color: #333;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
-        label {
-            font-size: 14px;
-            color: #555;
+
+        h1 {
+            color: #f39c12;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
         }
+
+        p {
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+
         input[type="text"], input[type="email"], input[type="password"] {
             width: 100%;
-            padding: 10px;
-            margin: 8px 0;
+            padding: 15px;
+            margin: 10px 0;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            font-size: 1rem;
         }
+
         button {
             width: 100%;
-            padding: 10px;
-            background-color: #007bff;
+            padding: 15px;
+            background-color: #8e44ad;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
+            font-size: 1.2rem;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
+
         button:hover {
-            background-color: #0056b3;
+            background-color: #9b59b6;
         }
-        .message {
-            text-align: center;
+
+        .login-link {
+            color: #f39c12;
+            font-size: 1rem;
+            text-decoration: none;
+            display: block;
+            margin-top: 20px;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilo para as mensagens */
+        .error-message {
+            color: red;
+            font-size: 1rem;
             margin-top: 10px;
         }
-        .alert {
-            text-align: center;
-            font-weight: bold;
-            color: red;
-        }
-        .success {
-            text-align: center;
-            font-weight: bold;
+
+        .success-message {
             color: green;
+            font-size: 1rem;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
 
-    <div class="form-container">
-        <h1>Cadastro</h1>
-        
-        <!-- Exibe mensagens de erro ou sucesso -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <ul>
-                    {% for category, message in messages %}
-                        <li class="alert {{ category }}">{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
-        
-        <form method="POST">
-            <label for="nome">Nome Completo</label><br>
-            <input type="text" id="nome" name="nome" required><br><br>
-            
-            <label for="email">Email</label><br>
-            <input type="email" id="email" name="email" required><br><br>
-            
-            <label for="senha">Senha</label><br>
-            <input type="password" id="senha" name="senha" required><br><br>
-            
+    <div class="cadastro-container">
+        <h1>Cadastre-se</h1>
+        <p>Crie sua conta para começar a colaborar no seu aprendizado.</p>
+
+        <form method="POST" action="/cadastro">
+            <input type="text" name="nome" placeholder="Nome Completo" required><br>
+            <input type="email" name="email" placeholder="E-mail" required><br>
+            <input type="password" name="senha" placeholder="Senha" required><br>
             <button type="submit">Cadastrar</button>
         </form>
-        
-        <div class="message">
-            <p>Já tem uma conta? <a href="/login">Faça login</a></p>
-        </div>
+
+    <!-- Mensagens de erro e sucesso -->
+    <div class="error-message">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+        <a href="/login" class="login-link">Já tem uma conta? Faça login</a>
     </div>
 
 </body>
