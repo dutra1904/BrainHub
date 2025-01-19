@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <style>
+        /* Definindo a cor roxa como tema principal */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
@@ -14,6 +15,8 @@
             height: 100vh;
             margin: 0;
         }
+        
+        /* Estilo do container principal */
         .home-container {
             background-color: #fff;
             padding: 30px;
@@ -23,35 +26,64 @@
             width: 100%;
             max-width: 400px;
         }
+        
         h1 {
             color: #333;
         }
+        
+        /* Menu de navegação */
+        .menu a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #6f42c1; /* Cor roxa */
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .menu a:hover {
+            color: #5a2a99; /* Cor roxa escura */
+        }
+        
+        .menu img {
+            margin-right: 10px;
+            width: 40px;
+        }
+
+        /* Estilo do botão de logout */
         button {
             width: 100%;
             padding: 10px;
-            background-color: #dc3545;
+            background-color: #6f42c1; /* Cor roxa */
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
+
         button:hover {
-            background-color: #c82333;
+            background-color: #5a2a99; /* Cor roxa escura */
         }
     </style>
 </head>
 <body>
-
-    
     <div class="home-container">
         <h1>Bem-vindo à Home!</h1>
         <p>Você está logado. Aproveite!</p>
+
+        <!-- Menu de navegação para o perfil -->
+        <div class="menu">
+            <a href="/perfil">
+                <img src="{{ url_for('static', filename='icone_perfil.png') }}" alt="Perfil">
+                <span>Perfil</span>
+            </a>                
+        </div>
         
         <!-- Botão para sair -->
         <a href="/logout">
             <button>Sair</button>
         </a>
     </div>
-
 </body>
 </html>

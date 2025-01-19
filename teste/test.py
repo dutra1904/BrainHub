@@ -21,6 +21,26 @@ def home():
         return redirect(url_for('login'))
     return render_template('home.html')
 
+@app.route('/perfil', methods=['GET', 'POST'])
+def perfil():
+    if 'user_id' not in session:
+        flash('Você precisa estar logado para acessar o perfil!', 'danger')
+        return redirect(url_for('login'))
+    
+    usuario = Usuario.query.get(session['user_id'])
+
+    if request.method == 'POST':
+        # Atualizar os dados do perfil
+        usuario.nome = request.form['nome']
+        usuario.biografia = request.form['biografia']
+        usuario.curso = request.form['curso']
+        db.session.commit()
+        flash('Perfil atualizado com sucesso!', 'success')
+        return redirect(url_for('perfil'))
+    
+    return render_template('perfil.html', usuario=usuario)
+
+
 # Página Login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
