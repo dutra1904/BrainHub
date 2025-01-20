@@ -8,7 +8,7 @@
         /* Estilo do corpo da página */
         body {
             font-family: Arial, sans-serif;
-            background-color: #121212; /* Fundo preto */
+            background-color: #121212;
             color: #fff;
             margin: 0;
             display: flex;
@@ -17,7 +17,7 @@
 
         /* Estilo do menu lateral */
         .sidebar {
-            background-color: #1e1e1e; /* Fundo cinza escuro para o menu */
+            background-color: #1e1e1e;
             padding: 20px;
             width: 250px;
             height: 100%;
@@ -28,7 +28,7 @@
         }
 
         .sidebar h2 {
-            color: #6f42c1; /* Tema roxo */
+            color: #6f42c1;
             margin-bottom: 20px;
         }
 
@@ -49,7 +49,7 @@
         }
 
         .menu a:hover {
-            color: #9a6df3; /* Roxo claro no hover */
+            color: #9a6df3;
         }
 
         /* Estilo do botão de sair */
@@ -117,6 +117,11 @@
             background-color: #5a2a99;
         }
 
+        img {
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
         .flash-message {
             margin-bottom: 20px;
             padding: 10px;
@@ -180,7 +185,14 @@
         {% endwith %}
 
         <!-- Formulário de edição do perfil -->
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
+            {% if usuario.foto_perfil %}
+                <img src="{{ url_for('static', filename='uploads/' + usuario.foto_perfil) }}" alt="Foto de Perfil" width="100" height="100">
+            {% endif %}
+
+            <label for="foto_perfil">Foto de Perfil:</label>
+            <input type="file" id="foto_perfil" name="foto_perfil" accept="image/*">
+
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" value="{{ usuario.nome }}" required>
 

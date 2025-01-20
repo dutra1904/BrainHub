@@ -1,11 +1,15 @@
 from flask import Flask, render_template, redirect, url_for, flash, request, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
 app.secret_key = 'chave-secreta'  # Necessário para usar sessões
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///usuarios.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['UPLOAD_FOLDER'] = 'static/uploads'  # Diretório para salvar as fotos de perfil
+app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}  # Tipos de arquivos permitidos
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
@@ -15,8 +19,13 @@ class Usuario(db.Model):
     nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     senha = db.Column(db.String(100), nullable=False)
-    biografia = db.Column(db.Text, nullable=True) 
-    curso = db.Column(db.String(100), nullable=True)  
+    biografia = db.Column(db.Text, nullable=True)
+    curso = db.Column(db.String(100), nullable=True)
+    foto_perfil = db.Column(db.String(255), nullable=True)  # Campo para armazenar o nome do arquivo da foto
+
+# Função para verificar se o arquivo é uma imagem permitida
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 # Página Home (após login)
 @app.route('/home')
@@ -38,14 +47,20 @@ def perfil():
         flash('Usuário não encontrado!', 'danger')
         return redirect(url_for('login'))
     
-    # Exibe os dados do usuário no console (para debug)
-    print(f"Usuário encontrado: {usuario.nome}, Biografia: {usuario.biografia}, Curso: {usuario.curso}")
-
     if request.method == 'POST':
         # Atualizar os dados do perfil
         usuario.nome = request.form['nome']
         usuario.biografia = request.form['biografia']
         usuario.curso = request.form['curso']
+
+        # Verificar se uma foto foi enviada
+        if 'foto_perfil' in request.files:
+            foto = request.files['foto_perfil']
+            if foto and allowed_file(foto.filename):
+                filename = secure_filename(foto.filename)
+                foto.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                usuario.foto_perfil = filename
+
         db.session.commit()
         flash('Perfil atualizado com sucesso!', 'success')
         return redirect(url_for('perfil'))
