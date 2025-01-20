@@ -5,85 +5,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <style>
-        /* Definindo a cor roxa como tema principal */
+        /* Estilo do corpo da página */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: #121212; /* Fundo preto */
+            color: #fff;
             margin: 0;
-        }
-        
-        /* Estilo do container principal */
-        .home-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-        }
-        
-        h1 {
-            color: #333;
-        }
-        
-        /* Menu de navegação */
-        .menu a {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: #6f42c1; /* Cor roxa */
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-        
-        .menu a:hover {
-            color: #5a2a99; /* Cor roxa escura */
-        }
-        
-        .menu img {
-            margin-right: 10px;
-            width: 40px;
+            height: 100vh;
         }
 
-        /* Estilo do botão de logout */
-        button {
+        /* Estilo do menu lateral */
+        .sidebar {
+            background-color: #1e1e1e; /* Fundo cinza escuro para o menu */
+            padding: 20px;
+            width: 250px;
+            height: 100%;
+            box-shadow: 4px 0 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .sidebar h2 {
+            color: #6f42c1; /* Tema roxo */
+            margin-bottom: 20px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #6f42c1;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu a img {
+            margin-right: 10px;
+            width: 24px;
+        }
+
+        .menu a:hover {
+            color: #9a6df3; /* Roxo claro no hover */
+        }
+
+        /* Estilo do botão de sair */
+        .logout {
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .logout button {
             width: 100%;
             padding: 10px;
-            background-color: #6f42c1; /* Cor roxa */
+            background-color: #6f42c1;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
 
-        button:hover {
-            background-color: #5a2a99; /* Cor roxa escura */
+        .logout button:hover {
+            background-color: #5a2a99;
+        }
+
+        /* Estilo do conteúdo principal */
+        .content {
+            flex-grow: 1;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .content h1 {
+            color: #6f42c1;
+        }
+
+        .content p {
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="home-container">
-        <h1>Bem-vindo à Home!</h1>
-        <p>Você está logado. Aproveite!</p>
-
-        <!-- Menu de navegação para o perfil -->
+    <!-- Menu Lateral -->
+    <div class="sidebar">
+        <h2>Estudo Colaborativo</h2>
         <div class="menu">
             <a href="/perfil">
                 <img src="{{ url_for('static', filename='icone_perfil.png') }}" alt="Perfil">
-                <span>Perfil</span>
-            </a>                
+                Perfil
+            </a>
+            <a href="/quizzes">
+                <img src="{{ url_for('static', filename='icone_quizzes.png') }}" alt="Quizzes">
+                Quizzes
+            </a>
+            <a href="/grupo">
+                <img src="{{ url_for('static', filename='icone_grupo.png') }}" alt="Grupo de Estudo">
+                Grupo de Estudo
+            </a>
+            <a href="/agenda">
+                <img src="{{ url_for('static', filename='icone_agenda.png') }}" alt="Agenda">
+                Agenda
+            </a>
         </div>
-        
-        <!-- Botão para sair -->
-        <a href="/logout">
-            <button>Sair</button>
-        </a>
+
+        <!-- Botão de logout -->
+        <div class="logout">
+            <a href="/logout">
+                <button>Sair</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="content">
+        <h1>Bem-vindo à Home!</h1>
+        <p>Você está logado. Aproveite!</p>
     </div>
 </body>
 </html>
