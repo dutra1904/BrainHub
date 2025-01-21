@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Quizzes</h1>
+    </header>
+
+    <main>
+        <!-- Barra de Pesquisa -->
+        <section>
+            <form method="GET" action="{{ url_for('quizzes.search') }}">
+                <input type="text" name="query" placeholder="Pesquisar quizzes" required>
+                <button type="submit">Buscar</button>
+            </form>
+        </section>
+
+        <!-- Lista de Quizzes -->
+        <section>
+            <h2>Quizzes Disponíveis</h2>
+            <ul>
+                <!-- Os quizzes serão preenchidos dinamicamente -->
+                {% for quiz in quizzes %}
+                    <li>
+                        <a href="{{ url_for('quizzes.view', quiz_id=quiz.id) }}">
+                            {{ quiz.title }}
+                        </a>
+                    </li>
+                {% else %}
+                    <li>Nenhum quiz encontrado.</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <!-- Botão Criar Quiz -->
+        <section>
+            <a href="{{ url_for('quizzes.create') }}" class="btn">Criar Novo Quiz</a>
+        </section>
+    </main>
+</body>
+</html>
