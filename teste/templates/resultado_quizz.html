@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado do Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1, h2 {
+            color: #6f42c1;
+        }
+
+        .resultado {
+            margin: 20px 0;
+        }
+
+        .resultado p {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .correto {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .errado {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-voltar {
+            background-color: #6f42c1;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            text-align: center;
+            display: block;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .btn-voltar:hover {
+            background-color: #5a2a99;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resultado do Quiz</h1>
+        <h2>{{ quiz.title }}</h2>
+        <div class="resultado">
+            {% for item in resultado %}
+                <p class="{{ 'correto' if item.correto else 'errado' }}">
+                    {{ item.pergunta }} - {% if item.correto %}Correto{% else %}Errado{% endif %}
+                </p>
+            {% endfor %}
+        </div>
+        <p><strong>Acertos: {{ acertos }} de {{ resultado|length }}</strong></p>
+        <a href="/quizzes" class="btn-voltar">Voltar para Quizzes</a>
+    </div>
+</body>
+</html>

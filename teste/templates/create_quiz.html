@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            background-color: #1e1e1e;
+            padding: 20px;
+            width: 250px;
+            height: 100%;
+            box-shadow: 4px 0 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .sidebar h2 {
+            color: #6f42c1;
+            margin-bottom: 20px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #6f42c1;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu a:hover {
+            color: #9a6df3;
+        }
+
+        .logout {
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .logout button {
+            width: 100%;
+            padding: 10px;
+            background-color: #6f42c1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .logout button:hover {
+            background-color: #5a2a99;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 30px;
+        }
+
+        .content h1 {
+            color: #6f42c1;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #6f42c1;
+            border-radius: 4px;
+            background-color: #1e1e1e;
+            color: #fff;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #6f42c1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #5a2a99;
+        }
+
+        .question-group {
+            margin-bottom: 20px;
+        }
+
+        .add-question {
+            background-color: #28a745;
+        }
+
+        .add-question:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Lateral -->
+    <div class="sidebar">
+        <h2>BrainHub</h2>
+        <div class="menu">
+            <a href="/home">Home</a>
+            <a href="/quizzes">Quizzes</a>
+        </div>
+        <div class="logout">
+            <a href="/logout">
+                <button>Sair</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="content">
+        <h1>Criar Novo Quiz</h1>
+
+        <form method="POST">
+            <label for="titulo">Título do Quiz:</label>
+            <input type="text" id="titulo" name="titulo" placeholder="Digite o título do quiz" required>
+
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" name="descricao" placeholder="Digite a descrição do quiz" rows="3"></textarea>
+
+            <div id="questions-container">
+                <div class="question-group">
+                    <label>Pergunta 1:</label>
+                    <input type="text" name="perguntas" placeholder="Digite a pergunta" required>
+                    <label>Resposta:</label>
+                    <input type="text" name="respostas" placeholder="Digite a resposta" required>
+                </div>
+            </div>
+
+            <button type="button" class="add-question" onclick="addQuestion()">Adicionar Pergunta</button>
+            <button type="submit">Criar Quiz</button>
+        </form>
+    </div>
+
+    <script>
+        let questionCount = 1;
+
+        function addQuestion() {
+            questionCount++;
+            const container = document.getElementById('questions-container');
+            const questionGroup = document.createElement('div');
+            questionGroup.className = 'question-group';
+
+            questionGroup.innerHTML = `
+                <label>Pergunta ${questionCount}:</label>
+                <input type="text" name="perguntas" placeholder="Digite a pergunta" required>
+                <label>Resposta:</label>
+                <input type="text" name="respostas" placeholder="Digite a resposta" required>
+            `;
+
+            container.appendChild(questionGroup);
+        }
+    </script>
+</body>
+</html>
