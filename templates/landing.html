@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainHub - Conecte-se com Estudantes</title>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f9f9f9;
+        color: #333;
+    }
+
+    header {
+        display: flex;
+        justify-content: flex-end;
+        padding: 10px 20px;
+        background-color: #4e2a84;
+    }
+
+    header nav a {
+        text-decoration: none;
+        margin-left: 10px;
+        padding: 10px 20px;
+        color: white;
+        border-radius: 5px;
+    }
+
+    header nav .btn-primary {
+        background-color: #6a42aa;
+    }
+
+    header nav .btn-secondary {
+        background-color: #4e2a84;
+        border: 2px solid white;
+    }
+
+    .hero {
+        text-align: center;
+        padding: 50px 20px;
+        background: linear-gradient(to right, #6a42aa, #4e2a84);
+        color: white;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .features {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .feature {
+        margin: 0 10px;
+        text-align: center;
+    }
+
+    .feature h2 {
+        color: #4e2a84;
+    }
+
+    footer {
+        text-align: center;
+        padding: 10px;
+        background-color: #4e2a84;
+        color: white;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Login</a>
+            <a href="{{ url_for('auth.cadastro') }}" class="btn btn-secondary">Cadastro</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Bem-vindo ao BrainHub</h1>
+            <p>
+                O BrainHub é a plataforma ideal para conectar estudantes de todo o país. 
+                Aqui, você pode interagir em grupos de estudo, testar seus conhecimentos com quizzes e 
+                organizar seus estudos com uma agenda prática e funcional.
+            </p>
+            <p>
+                Prepare-se para revolucionar a forma como você estuda e interage com outros alunos. 
+                Junte-se a nós!
+            </p>
+        </section>
+        <section class="features">
+            <div class="feature">
+                <h2>Quizzes</h2>
+                <p>Testes interativos para reforçar seu aprendizado.</p>
+            </div>
+            <div class="feature">
+                <h2>Grupos de Estudo</h2>
+                <p>Conecte-se com outros estudantes e aprenda colaborativamente.</p>
+            </div>
+            <div class="feature">
+                <h2>Agenda</h2>
+                <p>Organize suas tarefas e compromissos de estudo com eficiência.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 BrainHub. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
