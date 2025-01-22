@@ -1,115 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrainHub - Conecte-se com Estudantes</title>
+    <title>BrainHub - Conecte-se e Organize-se</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: #f9f9f9;
-        color: #333;
-    }
+            font-family: 'Roboto', sans-serif;
+            background: url('static/background.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-    header {
-        display: flex;
-        justify-content: flex-end;
-        padding: 10px 20px;
-        background-color: #4e2a84;
-    }
+        header {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+        }
 
-    header nav a {
-        text-decoration: none;
-        margin-left: 10px;
-        padding: 10px 20px;
-        color: white;
-        border-radius: 5px;
-    }
+        .btn-login {
+            background-color: #8e44ad;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
 
-    header nav .btn-primary {
-        background-color: #6a42aa;
-    }
+        .btn-login:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
 
-    header nav .btn-secondary {
-        background-color: #4e2a84;
-        border: 2px solid white;
-    }
+        main {
+            text-align: center;
+            margin: auto;
+            padding: 20px;
+        }
 
-    .hero {
-        text-align: center;
-        padding: 50px 20px;
-        background: linear-gradient(to right, #6a42aa, #4e2a84);
-        color: white;
-    }
+        .hero {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 40px;
+            animation: fadeIn 1.5s ease;
+        }
 
-    .hero h1 {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-    }
+        .hero h1 {
+            font-size: 3rem;
+            color: #f7a809;
+            margin-bottom: 20px;
+        }
 
-    .hero p {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-    }
+        .hero p {
+            font-size: 1.2rem;
+            line-height: 1.5;
+        }
 
-    .features {
-        display: flex;
-        justify-content: center;
-        padding: 20px;
-    }
+        .features {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
 
-    .feature {
-        margin: 0 10px;
-        text-align: center;
-    }
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideIn 1s forwards;
+            transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .feature h2 {
-        color: #4e2a84;
-    }
+        .feature:hover {
+            transform: translateY(100px) scale(100.1); /* Levanta e aumenta */
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+        }
 
-    footer {
-        text-align: center;
-        padding: 10px;
-        background-color: #4e2a84;
-        color: white;
-    }
+        .feature h2 {
+            color: #6f0d9a; 
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+        }
+
+        .feature:nth-child(1) {
+            animation-delay: 1s;
+        }
+
+        .feature:nth-child(2) {
+            animation-delay: 2s;
+        }
+
+        .feature:nth-child(3) {
+            animation-delay: 3s;
+        }
+
+        .feature:nth-child(4) {
+            animation-delay: 4s;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: auto;
+            padding: 10px 0;
+            background: rgba(0, 0, 0, 0.8);
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
     <header>
-        <nav>
-            <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Login</a>
-            <a href="{{ url_for('auth.cadastro') }}" class="btn btn-secondary">Cadastro</a>
-        </nav>
+        <a href="/login" class="btn-login">Login</a>
     </header>
 
     <main>
         <section class="hero">
             <h1>Bem-vindo ao BrainHub</h1>
-            <p>
-                O BrainHub é a plataforma ideal para conectar estudantes de todo o país. 
-                Aqui, você pode interagir em grupos de estudo, testar seus conhecimentos com quizzes e 
-                organizar seus estudos com uma agenda prática e funcional.
-            </p>
-            <p>
-                Prepare-se para revolucionar a forma como você estuda e interage com outros alunos. 
-                Junte-se a nós!
-            </p>
+            <p>Conecte-se com outros estudantes, participe de grupos de estudo, desafie-se com quizzes e organize-se com nossa agenda inteligente.</p>
         </section>
+
         <section class="features">
             <div class="feature">
+                <h2>Conexão</h2>
+                <p>Interaja com outros estudantes e troque conhecimentos em nossa plataforma colaborativa.</p>
+            </div>
+            <div class="feature">
                 <h2>Quizzes</h2>
-                <p>Testes interativos para reforçar seu aprendizado.</p>
+                <p>Teste seus conhecimentos com quizzes personalizados e desafiadores.</p>
             </div>
             <div class="feature">
                 <h2>Grupos de Estudo</h2>
-                <p>Conecte-se com outros estudantes e aprenda colaborativamente.</p>
+                <p>Crie ou participe de grupos para estudar em equipe e alcançar novos objetivos.</p>
             </div>
             <div class="feature">
                 <h2>Agenda</h2>
-                <p>Organize suas tarefas e compromissos de estudo com eficiência.</p>
+                <p>Mantenha sua rotina organizada com uma agenda integrada aos seus estudos.</p>
             </div>
         </section>
     </main>
